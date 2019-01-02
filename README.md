@@ -19,13 +19,13 @@ What things you need to install the software and how to install them
 
 * import-export
   * Connect_and_Load_Data_to_ADW.py 
-   * Connect to Oracle Autonomous DB
-   * Connect to Twitter Application
-   * Collect Real Time Data from Twitter
-   * Insert data in Real Time into Oracle Autonomous DB
+    * Connect to Oracle Autonomous DB
+    * Connect to Twitter Application
+    * Collect Real Time Data from Twitter
+    * Insert data in Real Time into Oracle Autonomous DB
 * notebook
   * Indian Premier League.json - SQL notebook
-     ** Perform Data Analysis
+    * Perform Data Analysis
 * reset
   * TwitterReset.py - drop tables and remove data
 * source
