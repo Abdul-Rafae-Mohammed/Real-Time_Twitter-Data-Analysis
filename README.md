@@ -1,7 +1,8 @@
 # Real Time Twitter Data Analysis
 
 
-Twitter data import into ADW and analysis project
+Project to implement real time twitter data analysis  using python and Oracle Autonomous Database deployed on Oracle Cloud Infrastructure (OCI)
+
 
 ## Introduction
 
