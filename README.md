@@ -32,6 +32,12 @@ What things you need to install the software and how to install them
 * source
   * Real Time Twitter Data
 
+Components:
+* Data Source : Twitter
+* Data Collection and Processing : Python
+* Data Storage : Oracle Database on Oracle Cloud Infrastructure 
+* Data Visualization/Reporting : Oracle SQL Notebook
+
 
 ## Authors
 
