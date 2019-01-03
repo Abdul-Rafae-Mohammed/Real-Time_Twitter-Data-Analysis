@@ -25,7 +25,7 @@ class MyListener(StreamListener):
     def on_data(self, data):
         try:
             #Connecting to ADW
-            cur = con.connect('Abdul/Autonomousdb123#@challengeadw_low')
+            cur = con.connect('username/password#@challengeadw_low')
             cursors = cur.cursor()
             
             #Saving the tweets as JSON
@@ -175,7 +175,7 @@ class MyListener(StreamListener):
 #######################################################################
 def connectToADW(name):
     #Creating a connection
-    cur = con.connect('Abdul/Autonomousdb123#@challengeadw_low')
+    cur = con.connect('username/password#@challengeadw_low')
     flag = ""
     cursors = cur.cursor()
     
@@ -259,11 +259,11 @@ def streamData(auth, term):
 def main():
 
     #Authentication and Authorization tokens for twitter application
-    consumer_key = 'P5SFPosj9tiEj17XdaX1NaRkB'
-    consumer_secret = 'k7GgfwyydgsfimpjeRixqBoAUESNM91XGd1KIkXIcdwydOLM8M'
+    consumer_key = '<consumer_key>'
+    consumer_secret = '<consumer_secret>'
 
-    access_token = '834233475779723264-043nlqmAANtUw8k2PTQkVfU4z6htl4M'
-    access_secret = 'QPfmfzWbyLxR6wcNoUTWLFGyofwkvyDR9HvtqO8mEBnuj'
+    access_token = '<access_token>'
+    access_secret = '<access_secret>'
 
 
     #Configuration
