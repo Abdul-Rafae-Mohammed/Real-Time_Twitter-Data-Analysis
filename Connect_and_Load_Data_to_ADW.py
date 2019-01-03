@@ -25,7 +25,7 @@ class MyListener(StreamListener):
     def on_data(self, data):
         try:
             #Connecting to ADW
-            cur = con.connect('username/password#@challengeadw_low')
+            cur = con.connect('username/password#@<db_name>_low')
             cursors = cur.cursor()
             
             #Saving the tweets as JSON
@@ -175,7 +175,7 @@ class MyListener(StreamListener):
 #######################################################################
 def connectToADW(name):
     #Creating a connection
-    cur = con.connect('username/password#@challengeadw_low')
+    cur = con.connect('username/password#@<db_name>_low')
     flag = ""
     cursors = cur.cursor()
     
