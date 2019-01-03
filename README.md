@@ -27,7 +27,7 @@ What things you need to install the software and how to install them
   * Indian Premier League.json - SQL notebook
     * Perform Data Analysis
 * reset
-  * TwitterReset.py - drop tables and remove data
+  * TwitterDataReset.py - drop tables and remove data
 * source
   * Real Time Twitter Data
 
