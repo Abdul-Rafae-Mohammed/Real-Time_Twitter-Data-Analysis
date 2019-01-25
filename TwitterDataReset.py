@@ -36,8 +36,8 @@ def connectToADW(name):
         cursors.execute('DROP TABLE TweetsData')
         flag = "Table TweetsData deleted"
     except BaseException as de:
-        print "Table does not exist"
-        print "Error while deleting the table: %s" % str(de)
+        print "Table TweetsData does not exist"
+        print "Error while deleting TweetsData table: %s" % str(de)
         flag = flag+"Table TweetsData does not exist"
 
     # Deleting user data
@@ -45,8 +45,8 @@ def connectToADW(name):
         cursors.execute('DROP TABLE UserData')
         flag = flag + ", Table UserData Dropped"
     except BaseException as de:
-        print "Table does not exist"
-        print "Error while dropping the table: %s" % str(de)
+        print "Table UserData does not exist"
+        print "Error while dropping UserData table: %s" % str(de)
         flag = flag + ", Table UserData already deleted"
 
     
@@ -55,9 +55,28 @@ def connectToADW(name):
         cursors.execute('DROP TABLE SENTIMENTS')
         flag = flag + ", Table Sentiments Dropped"
     except BaseException as de:
-        print "Table does not exist"
-        print "Error while dropping the table: %s" % str(de)
+        print "Table SENTIMENTS does not exist"
+        print "Error while dropping the SENTIMENTS table: %s" % str(de)
         flag = flag + ", Table Sentiments already deleted"
+    
+    # Deleting sentiment data
+    try:
+        cursors.execute('DROP TABLE TOPTEN')
+        flag = flag + ", Table Top Ten Dropped"
+    except BaseException as de:
+        print "Table TopTen does not exist"
+        print "Error while dropping the TopTen table: %s" % str(de)
+        flag = flag + ", Table TopTen already deleted"
+
+
+    # Deleting sentiment data
+    try:
+        cursors.execute('DROP TABLE NORMAL_TWEETS')
+        flag = flag + ", Table NORMAL_TWEETS Dropped"
+    except BaseException as de:
+        print "Table NORMAL_TWEETS does not exist"
+        print "Error while dropping the NORMAL_TWEETS table: %s" % str(de)
+        flag = flag + ", Table NORMAL_TWEETS already deleted"
     
     #Closing the connection
     cursors.close()
