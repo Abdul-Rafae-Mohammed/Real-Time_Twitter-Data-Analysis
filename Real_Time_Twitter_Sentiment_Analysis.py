@@ -2,6 +2,7 @@
 #                            IMPORT SECTION                           #
 #######################################################################
 
+import argparse
 import cx_Oracle as con
 import tweepy as tw
 import simplejson as json
@@ -33,7 +34,7 @@ class MyListener(StreamListener):
     def on_data(self, data):
         try:
             #Connecting to ADW
-            cur = con.connect('Admin/WElcome_123#@ATPAsset_low')
+            cur = con.connect('Abdul/Autonomousdb123#@challengeadw_low')
             cursors = cur.cursor()
             
             #Saving the tweets as JSON
@@ -274,7 +275,7 @@ class MyListener(StreamListener):
 #######################################################################
 def connectToADW(name):
     #Creating a connection
-    cur = con.connect('Admin/WElcome_123#@ATPAsset_low')
+    cur = con.connect('Abdul/Autonomousdb123#@challengeadw_low')
     flag = ""
     cursors = cur.cursor()
     
@@ -484,10 +485,7 @@ def main():
     access_token = '834233475779723264-043nlqmAANtUw8k2PTQkVfU4z6htl4M'
     access_secret = 'QPfmfzWbyLxR6wcNoUTWLFGyofwkvyDR9HvtqO8mEBnuj'
 
-
-    #Configuration
-    mask_char = '*'
-    tablename = 'TweetData'
+    
     
     auth = setAccess(consumer_key,consumer_secret,access_token,access_secret)
     
@@ -497,16 +495,9 @@ def main():
     
     #Connect to Oracle Autonomous Database
     message = connectToADW(tablename)
-    
-    #Get most 10 recent tweets from my feed
-    #getTimelineInfo(api)
-    #Get the list of all the followers
-    #getFriends(api)
-    # Get the list of all of my tweets
-    #getTweets(api)
    
     # Streaming Tweets
-    streamData(auth, 'ipl')
+    streamData(auth, keyword)
 
 #Curse Word Dictionary
 curse_words = set(['anus','arse','arsehole','ass','ass-hat','ass-jabber','ass-pirate','assbag','assbandit','assbanger','assbite','assclown','asscock','asscracker','asses','assface','assfuck','assfucker','assgoblin','asshat','asshead','asshole','asshopper','assjacker','asslick','asslicker','assmonkey','assmunch','assmuncher','assnigger','asspirate','assshit','assshole','asssucker','asswad','asswipe','axwound','camel toe','carpetmuncher','chesticle','chinc','chink','choad','chode','clit','clitface','clitfuck','clusterfuck','cock','cockass','cockbite','cockburger','cockface','cockfucker','cockhead','cockjockey','cockknoker','cockmaster','cockmongler','cockmongruel','cockmonkey','cockmuncher','cocknose','cocknugget','cockshit','cocksmith','cocksmoke','cocksmoker','cocksniffer','cocksucker','cockwaffle','coochie','coochy','coon','cooter','cracker','cum','cumbubble','cumdumpster','cumguzzler','cumjockey','cumslut','cumtart','cunnie','cunnilingus','cunt','cuntass','cuntface','cunthole','cuntlicker','cuntrag','cuntslut','dago','damn','deggo','dick','dick-sneeze','dickbag','dickbeaters','dickface','dickfuck','dickfucker','dickhead','dickhole','dickjuice','dickmilk','dickmonger','dicks','dickslap','dicksucker','dicksucking','dicktickler','dickwad','dickweasel','dickweed','dickwod','dike','dildo','dipshit','doochbag','dookie','douche','douche-fag','douchebag','douchewaffle','dumass','dumb ass','dumbass','dumbfuck','dumbshit','dumshit','dyke','bampot','bastard','beaner','bitch','bitchass','bitches','bitchtits','bitchy','blow job','blowjob','bollocks','bollox','boner','brotherfucker','bullshit','bumblefuck','butt plug','butt-pirate','buttfucka','buttfucker','fag','fagbag','fagfucker','faggit','faggot','faggotcock','fagtard','fatass','fellatio','feltch','flamer','fuck','fuckass','fuckbag','fuckboy','fuckbrain','fuckbutt','fuckbutter','fucked','fucker','fuckersucker','fuckface','fuckhead','fuckhole','fuckin','fucking','fucknut','fucknutt','fuckoff','fucks','fuckstick','fucktard','fucktart','fuckup','fuckwad','fuckwit','fuckwitt','fudgepacker','gay','gayass','gaybob','gaydo','gayfuck','gayfuckist','gaylord','gaytard','gaywad','goddamn','goddamnit','gooch','gook','gringo','guido','handjob','hard on','heeb','hell','ho','hoe','homo','homodumbshit','honkey','humping','jackass','jagoff','jap','jerk off','jerkass','jigaboo','jizz','jungle bunny','junglebunny','kike','kooch','kootch','kraut','kunt','kyke','lameass','lardass','lesbian','lesbo','lezzie','mcfagget','mick','minge','mothafucka','mothafuckin','motherfucker','motherfucking','muff','muffdiver','munging','negro','nigaboo','nigga','nigger','niggers','niglet','nut sack','nutsack','paki','panooch','pecker','peckerhead','penis','penisbanger','penisfucker','penispuffer','piss','pissed','pissed off','pissflaps','polesmoker','pollock','poon','poonani','poonany','poontang','porch monkey','porchmonkey','prick','punanny','punta','pussies','pussy','pussylicking','puto','queef','queer','queerbait','queerhole','renob','rimjob','ruski','sand nigger','sandnigger','schlong','scrote','shit','shitass','shitbag','shitbagger','shitbrains','shitbreath','shitcanned','shitcunt','shitdick','shitface','shitfaced','shithead','shithole','shithouse','shitspitter','shitstain','shitter','shittiest','shitting','shitty','shiz','shiznit','skank','skeet','skullfuck','slut','slutbag','smeg','snatch','spic','spick','splooge','spook','suckass','tard','testicle','thundercunt','tit','titfuck','tits','tittyfuck','twat','twatlips','twats','twatwaffle','unclefucker','va-j-j','vag','vagina','vajayjay','vjayjay','wank','wankjob','wetback','whore','whorebag','whoreface','wop'])
@@ -514,11 +505,22 @@ curse_words = set(['anus','arse','arsehole','ass','ass-hat','ass-jabber','ass-pi
 #Racial Slur Dictionary
 racial_slurs = set(['51st Stater', 'Abba-Dabba', 'Abo', 'Aboriginal', 'Adolf', 'Ahab', 'Ainu', 'Aboriginal', 'Albino', 'Ame-koh', 'AmeriKKKan', 'Ami', 'Amo', 'Angie', 'Antique Farm Equipment', 'Apple', 'Americans', 'Apu', 'Armo', 'Aunt Jamima', 'BBK', 'Baboomba', 'Babuska', 'Slavs', 'Bagel-Dog', 'Bahadur', 'Bamboo Coon', 'Banana', 'Bans', 'Cans', 'Beach-Nigger', 'Bean Burrito', 'Beaner', 'Beanie', 'Beaver-Beater', 'Canadians', 'Beef-Curtain', 'Berry Picker', 'Bhindu', 'Bhrempti', 'Big Nose', 'Bjork', 'Black Barbie', 'Black Dagos', 'Blackie', 'Blackrobe', 'Blanco', 'Blanket-Ass', 'Americans', 'Blaxican', 'Blockhead', 'Blow', 'Blue-Gummer', 'Blue-eyed Devil', 'Blue', 'Blew', 'Boat-People', 'Cubans', 'Boffer', 'Boofer', 'Bog-trotter', 'Bogan', 'Americans', 'Bohunk', 'Boogalee', 'Boogie', 'Book-Book', 'Boong', 'Aboriginal', 'Bootlip', 'Border Nigger', 'Border-Bunny', 'Border-Hopper', 'Boudreaux', 'Boxhead', 'Boy', 'Bozgor', 'Brillo Pad', 'Brit', 'Bro', 'Brother', 'Bruised Banana', 'Bubble', 'Buck', 'Buck Nigger', 'Buckethead', 'Buckra', 'Buckwheat', 'Buddhahead', 'Bug-Eater', 'Buleh', 'Bumblebee', 'Bumper Lips', 'Bun', 'Buppie', 'Burnt Cracker', 'Burnt Match', 'Burnt Toast', 'Burr Head', 'Bush-Boogie', 'Bushnigger', 'Americans', 'Butter', 'Cab Nigger', 'Arabs', 'Cabbage', 'Cabdriver', 'Arabs', 'Camel Cowboy', 'Camel Jockey', 'Camel-Humper', 'Camel-Jacker', "Can'ardly", 'Canadian', 'Canal', 'Cancer', 'Caneater', 'Cankee', 'Cankie', 'Cans', 'Bans', 'Canuck', 'Canucklehead', 'Cargo', 'Carlton (Banks)', 'Carpet Pilot', 'Casabooboo', 'Cascos', 'Cashew', 'Casino-Owner American', 'Americans', 'Cat-lick', 'Caucasianally- Challenged', 'Caveman', 'Chale', 'Cham', 'Charlie', 'Cheeser', 'Chefur', 'Chief', 'Americans', 'Chigger', 'Chilango', 'Chili Shitter', 'Chinaman', 'Chinese', 'Chinese Wetback', 'Chinig', 'Chink', 'Chink-a-billy', 'Chino', 'Chinxican', 'Chite', 'Choco', 'Chocolate Drop', 'Chocolate-Dipper', 'Chole', 'Chonky', 'Choo-Choo', 'Christ Killer', 'Chug', 'Americans', 'Coal-Burner', 'Women', 'Coalminer', 'Cocksauce', 'Cocoa', 'Cocoa Puff', 'Whites', 'Cocolo', 'Coconut', 'Hispanics', 'Colored', 'Commie', 'Congo Lip', 'Conky', 'Cookie', 'Coolie', 'Coon', 'Coon Ass', 'Cordon', 'Cornbread', 'Cornelius', 'Cotton-Picker', 'Cow-Kisser', 'Cowboy-Killer', 'Americans', 'Cowfuck', 'Cracker', 'Craw', 'Cremlin', 'Cricket', 'Crime', 'Crizm', 'Cubs', 'Curry-Muncher', 'Dago', 'Dan', 'Darkie', 'Dead Sea Pedestrian', 'Dees-Right', 'Demi-nigger', 'Devil', 'Dial', 'Diaper-Head', 'Dib', 'Dicksuckinflog', 'Dinge', 'Dink', 'Ditchpig', 'Dog-Muncher', 'Domes', 'Dot-Head', 'Double A', 'Drywaller', 'Dumb Wet', 'Dune Coon', 'Dune Nigger', 'Dyke-Jumper', 'Egg', 'Egglet', 'Eggplant', 'Eh-Holes', 'Ehlipe', 'Eraser Head', 'Erkel', 'Ese', 'Etch', 'FBI', 'Americans', 'Fake Mexican', 'Americans', 'Fan Kuei', 'Farang', 'Falang', 'Feather', 'Americans', 'Feb', 'Felipe Parkhurst', 'Fez', 'Fig Gobbler', 'Firangi', 'Firewood', 'Fish', 'Fish-Belly', 'Flat-Back', 'Flip', 'Fob', 'Cubans', 'Fog Nigger', 'Four By Two', 'Fritz', 'Frog', 'Frostback', 'Fur Licker', 'G', 'Gee', 'Gabacho', 'Gai-jin', 'Gai-ko', 'Gar', 'Gasbag', 'Americans', 'Gatemaster', 'Geechee', 'Geep', 'German Oven Mitt', 'Gew', 'Ghetto', 'Ghetto Hamster', 'Ghost', 'Gimpy', 'Ginzo', 'Goldberg', 'Golden Toe', 'Gomer', 'Gook', 'Gookaniese', 'Goombah', 'Gorilla Head', 'Goy', 'Goyim', 'Grape-Stomper', 'French', 'Gravelbellies', 'Grease Ball', 'Grease Bag', 'Hispanics', 'Greezer', 'Grey', 'Greyboy', 'Greygirl', 'Gringo', 'Gringa', 'Gro', 'Groid', 'Groundskeeper Willie', 'Grout', 'Guerro', 'Guido', 'Guinea', 'Guteater', 'Americans', 'Gwailo', 'Gweilo', 'Gwat', 'Gyp', 'Gyppo', 'Habibi', 'Hadji', 'Hagwei', 'Hayquay', 'Half Baked', 'Half Breed', 'Half-Dick', 'Halfrican', 'Haole', 'Hapshi', 'Harbor-Bomber', 'Harp', 'Hawaga', 'Khawaga', 'Hay Seed', 'Hebe', 'Hebro', 'Heinee', 'Heinz', 'Helo', 'Herm', 'Herring Choker', 'Hick', 'Hickory-Smoked', 'Higger', 'Hillbilly', 'Hispandex', 'Hitler', 'Homey', 'Homie', 'Honkie', 'Honky', 'Hooknose', 'Hoosier', 'Horse-Gums', 'Hoser', 'Hot Dog Eater', 'Hot Footer', 'Hotel', 'Hotnot', 'House Nigger', 'Hucka-lucka', 'Hun', 'Hunyak', 'Huskie', 'Hymie', 'Ian', 'Ice Monkey', 'Ice Nigger', 'Iceback', 'Ikey-Mo', 'Injun', 'Americans', 'Island Nigger', 'J.J.', 'J.O.', 'Jabonee', 'Jackamammy', 'Jandel', 'Janner', 'Jap', 'Jar Jar', 'Jaundy Boy', 'Jerry', 'Jesus Killer', 'Jew', 'Jew Killer', 'Jew-Bag', 'Jewban', 'Jewlet', 'Jewrab', 'Jewxican', 'Jigaboo', 'Jigger', 'Jihadi', 'Jikky', 'Jim', 'Jock', 'Joe', 'Jr. Mint', 'Jungle Bunny', 'KFC', 'Kaaskop', 'Kabloonuk', 'Kaek', 'Kaffer', 'Kaffir', 'Kafir', 'Kala', 'Katzenfresser', 'Khazar', 'Kike', 'Kingfish', 'Kiwi', 'Knees Grow', 'Knuckle-Dragger', 'Koku-jin', 'Kraut', 'Kukolokod', 'Kung-fu', 'Kunta', 'Kunta Kinte', 'Kurombo', 'Landya', 'Latrino', 'Lava Lamp', 'Lawn Jockey', 'Leb', 'Lebbo', 'Lefty', 'Lemonhead', 'Leprechaun', 'Limey', "Lincoln's Mistake", 'Lobsterbacks', 'Lofan', 'Lowlander', 'Lucius', 'Macaroni', 'Makaronifresser', 'Maldito Bori', 'Mandingo', 'Mandinka', 'Mangro-Monkey', 'Maple Leaf Nigger', 'Massa', 'Mayate', 'Mayonnaise', 'Meat Pie', 'Med Wop', 'Melanzana', 'Mellanoid', 'Mestizo', 'Mexijew', 'Michelli', 'Mick', 'Midnight', 'Mockey', 'Mof', 'Moffen', 'Mohow', 'Americans', 'Mojo', 'Moke', 'Monkey', 'Monkeyboy', 'Mook', 'Mooliachi', 'Moolie', 'Moon Cricket', 'Moor', 'Moosefucker', 'Moss Eater', 'Mouse', 'Mud Duck', 'Mud People', 'Mud Shark', 'Muk', 'Muktuk', 'Mullato', 'Mullethead', 'Mung', 'Muppetfucker', 'Mutt', 'Nacho', 'Naco', 'Naga', 'Nammer', 'Napkin Nigger', 'Nappy Head', 'Narrow Back', 'Nazi', 'Neck', 'Neechee', 'Americans', 'Negro', 'Nethead', 'Newfie', 'Ni-ni', 'Nickel Nose', 'Nig-nog', 'Nigger', 'Niggerette', 'Niggeroid', 'Nigglet', 'Nigloo', 'Niknok', 'Nikon', 'Nine Iron', 'Ninja', 'Ninky', 'Nip', 'Nipper', 'Nit', 'Americans', 'Nog', 'Nordski', 'Nubian Princess', 'Nuprin', 'Nurple', 'Ocnod', 'Octroon', 'Octaroon', 'Ofay', 'Orange Picker', 'Orb', 'Oreo', 'Orlando', 'Osrouge', 'Oven-Baked', 'Oven-Dwellers', 'Pakeha', 'Paki', 'Pakoniggy', 'Paleface', 'Pancake', 'Panda', 'Panhead', 'Pastyface', 'Patel', 'Patty', 'Paddy', 'Peckerwood', 'Penny Chaser', 'Pepperbelly', 'Persuasion', 'Petrol Sniffers', 'Pickaninny', 'Pie Face', 'Americans', 'Piffke', 'Pineapple Nigger', 'Pinewood', 'Ping-pang', 'Pinko', 'Pinky Poops', 'Pinto', 'Pit', 'Pizza', 'Pizzabagel', "Po'bucker", 'Po-Bean', 'Pocho', 'Americans', 'Pogue', 'Pohm', 'Point-Six (.6)', 'Pointy-Head', 'Polarican', 'Pollo', 'Polock', 'Pom', 'Pome', 'Poo', 'Popolo', 'Porch-Monkey', 'Pork-chop', 'Portagee', 'Portajew', 'Potato Head', 'Powder', 'Powerpoint', 'Prairie-Nigger', 'Americans', 'Pretendian', 'Americans', 'Pubie', 'Puckhead', 'Pull-Start', 'Punjab', 'Push-Button', 'Quadroon', 'Race-Traitor', 'Rag-head', 'Ragu', 'Rail-Hopper', 'Red', 'Americans', 'Red Coat', 'Red Nigger', 'Americans', 'Red Sea Pedestrian', 'Redbone', 'Redneck', 'Redskin', 'Americans', 'Reggie', 'Regin', 'Rice King', 'Rice-Eater', 'Rice-Paddy', 'Rice-Picker', 'Rico Suave', 'River-Crosser', 'Roach-Rancher', 'Roofucker', 'Rosbif', 'Round-Eye', 'Rubberhead', 'Rube', 'Ruble Head', 'Rug-Pilot', 'Rug-Rider', 'Ruskie', 'Rutabaga', 'SBH', 'Safe', 'Salmon Nigger', 'Americans', 'Saltine', 'Saltwater Nigger', 'Sambo', 'Sand Moolie', 'Sand Nigger', 'Sassenach', 'Sayeedi', 'Saeedi', 'Scheiss-Ami', 'Schiptar', 'Schmeisser', 'Schwarzie', 'Schwoogie', 'Scratch-Back', 'Seagull', 'Seinfeld', 'Self-Chosen, The', 'Semi-Simian', 'Semihole', 'Americans', 'Seppo', 'Septic', 'Shadow-Smurf', 'Shagitz', 'Shiksa', 'Shant', 'Sheeny', 'Sheepfucker', 'Welsh', 'Sheister', 'Shilaeli Hugger', 'Shine', 'Shiner', 'Shit-Kicker', 'Shitheel', 'Shovel-Head', 'Shvartz', 'Shylock', 'Silverback', 'Silvery', 'Skillet', 'Skimo', 'Skinflint', 'Skip', 'Slant', "Slantey-eye'd", 'Slave', 'Slit', 'Slope', 'Slopehead', 'Asians', 'Smigger', 'Smoke Jumper', 'Smokefoot', 'Snigger', 'Snipes', 'Snowback', 'Snowflake', 'Sole', 'Sorta Rican', 'Spade', 'Spanglish', 'Spear Chucker', 'Spec', 'Spegro', 'Spew', 'Spic', 'Spickaboo', 'Spigger', 'Spink', 'Spizzician', 'Splib', 'Spoda', 'Spook', 'Spoon', 'Sprout', 'Spudnigger', 'Sputnik', 'Squarehead', 'Squaw', 'Americans', 'Squint', 'Squinty', 'Stovelid', 'Stovepipe', 'Strange Fruit', 'Stump Jumper', 'Tree Jumper', 'Sub-Human', 'Suntan', 'Swamp Kike', 'Swamp Yankee', 'Swirlie', 'TPT', 'Tabeetsu', 'Table Face', 'Taco Bender', 'Taffy', 'Tape Head', 'Tar Baby', 'Target', 'Tater Tot', 'Tea-wop', 'Teabag', 'Tee-Pee Creeper', 'Americans', 'Terrence', 'Three-Fifth (3/5)', 'Timber Nigger', 'Americans', 'Timmy', 'Toad', 'Toby', 'Tomato Picker', 'Tommy', 'Tony', 'Tory', 'Towel-head', 'Trailer Trash', 'Trash', 'Tree-Swinger', 'Tunnel Digger', 'Twinkie', "Uncle Ben's Boys", 'Uncle Tom', 'Velcro-head', 'Vodkalky', 'WT', 'Wab', 'Wagon Burner', 'Americans', 'Wahoo', 'Americans', 'Waki Paki', 'Wanker', 'War Whoop', 'Americans', 'Wasp', 'Watermelons', 'Webe', 'Wej', 'Welfare Monkeys', 'Wet-Back', 'Wexican', 'Whale Turd', 'White Chocolate', 'Whitetrash', 'Whitey', 'Wic', 'Wigger', 'Wiggerette', 'Wiggie', 'Wigg', 'Wikki Wikki', 'Windchimes', 'Wink', 'Wog', 'Italians', 'Wonder Bread', 'Wonder Bread Wop', 'Wood', 'Wool Head', 'Woolyback', 'Wop', 'Yankee', 'Yard Ape', 'Yard Coolies', 'Yello-Devil', 'Yellow', 'Yellow Monkey', 'Yen', 'Yenta', 'Yid', 'Yid-Lid', 'Yo Yo', 'Yoko', 'Yolk', 'Yom', 'Yugo', 'Zambo', 'Zebra', 'Zeeb', 'Zip', 'Zipperhead'])
 
+  
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('key', metavar='Keyword', help='The term or keyword or event you would like to collect tweets about.')
 
+args = parser.parse_args()
+
+keyword = args.key
 #Creating a Counter to calculate term frequencies
 hash_freq = Counter()
 term_freq = Counter()
 bigrams_freq = Counter()
 com = defaultdict(lambda : defaultdict(int))
 com_topten=dict()
+
+#Configuration
+mask_char = '*'
+tablename = 'TweetData'
+
 main()
