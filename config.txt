@@ -1,0 +1,8 @@
+keyword:ipl
+consumer_key:P5SFPosj9tiEj17XdaX1NaRkB
+consumer_secret:k7GgfwyydgsfimpjeRixqBoAUESNM91XGd1KIkXIcdwydOLM8M
+access_token:834233475779723264-043nlqmAANtUw8k2PTQkVfU4z6htl4M
+access_secret:QPfmfzWbyLxR6wcNoUTWLFGyofwkvyDR9HvtqO8mEBnuj
+connect_string:Abdul/Autonomousdb123#@challengeadw_low
+curse_words_dict:curse_words.txt
+racial_slurs_dict:racial_slurs.txt
