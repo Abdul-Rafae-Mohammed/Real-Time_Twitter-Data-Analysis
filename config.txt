@@ -1,4 +1,4 @@
-keyword:ipl
+keyword:<key word for pulling tweets>
 consumer_key:<Twitter App Consumer Secret>
 consumer_secret:<Twitter App Consumer Secret>
 access_token:<Twitter App access token>
