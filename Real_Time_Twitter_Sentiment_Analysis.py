@@ -481,7 +481,7 @@ def configure_parameters(file_name):
 
     config_params = dict()
     for i in config_par:
-        key_value = i.strip('\n').split(":")
+        key_value = i.strip('\n').strip(' ').split(":")
         config_params[key_value[0]]=key_value[1]
 
     key = config_params['keyword']
