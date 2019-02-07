@@ -21,7 +21,7 @@ from textblob import TextBlob
 #######################################################################
 def connectToADW(name):
     #Creating a connection
-    cur = con.connect('Abdul/Autonomousdb123#@challengeadw_low')
+    cur = con.connect(connect_string)
     flag = ""
     cursors = cur.cursor()
     
@@ -84,10 +84,32 @@ def connectToADW(name):
     
     return flag
 
+def configure_parameters(file_name):
+    config_fp = open(file_name,'r')
+
+    config_par = config_fp.readlines()
+
+    config_params = dict()
+    for i in config_par:
+        key_value = i.strip('\n').strip(' ').split(":")
+        config_params[key_value[0]]=key_value[1]
+
+    connect_string = config_params['connect_string']
+    return connect_string
+
+
 #MAIN FUNCTION
 def main():
 
     #Connect to Oracle Autonomous Database
     message = connectToADW(tablename)
-    
+
+parser = argparse.ArgumentParser(description='Configure the parameters.')
+parser.add_argument('config_file', metavar='config_file', help='The file containing the twitter auth tokens and other configuration parameters.')
+
+args = parser.parse_args()
+
+config = args.config_file
+connect_string=configure_parameters(config)
+
 main()
